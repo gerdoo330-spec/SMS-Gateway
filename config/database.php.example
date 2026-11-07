@@ -1,0 +1,11 @@
+<?php
+declare(strict_types=1);
+
+// نمونه تنظیمات دیتابیس؛ پس از تکمیل ساختار، آن را به database.php تغییر نام دهید.
+return [
+    'host' => '127.0.0.1',
+    'database' => 'sms_gateway',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8mb4',
+];
