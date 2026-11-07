@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../app/Services/Database.php';
+require_once __DIR__ . '/../app/Services/JalaliDate.php';
 
 $pdo = Database::connection();
 
@@ -132,7 +133,7 @@ th,td{text-align:right;padding:14px 13px;border-bottom:1px solid #edf1f6;font-si
 <div class="table-head"><h2>فهرست پیام‌های صف</h2><span class="result-count"><?= number_format($totalRows) ?> نتیجه</span></div>
 <div class="table-wrap"><table><thead><tr><th>شناسه</th><th>گیرنده</th><th>متن پیام</th><th>پروژه</th><th>وضعیت صف</th><th>تلاش</th><th>زمان ثبت</th></tr></thead><tbody>
 <?php if (!$rows): ?><tr><td colspan="7" class="empty">موردی مطابق جستجو پیدا نشد.</td></tr><?php else: foreach ($rows as $row): ?>
-<tr><td>#<?= h($row['message_id']) ?></td><td class="phone"><?= h($row['phone']) ?></td><td><div class="message" title="<?= h($row['message']) ?>"><?= h(mb_strlen((string)$row['message']) > 90 ? mb_substr((string)$row['message'], 0, 90) . '…' : $row['message']) ?></div></td><td><?= h($row['project_name'] ?: '—') ?></td><td><span class="pill <?= h($statusClasses[$row['queue_status']] ?? 'queued') ?>"><?= h($statusLabels[$row['queue_status']] ?? $row['queue_status']) ?></span></td><td class="attempts"><?= number_format((int)$row['attempts']) ?></td><td><?= h($row['queued_at']) ?></td></tr>
+<tr><td>#<?= h($row['message_id']) ?></td><td class="phone"><?= h($row['phone']) ?></td><td><div class="message" title="<?= h($row['message']) ?>"><?= h(mb_strlen((string)$row['message']) > 90 ? mb_substr((string)$row['message'], 0, 90) . '…' : $row['message']) ?></div></td><td><?= h($row['project_name'] ?: '—') ?></td><td><span class="pill <?= h($statusClasses[$row['queue_status']] ?? 'queued') ?>"><?= h($statusLabels[$row['queue_status']] ?? $row['queue_status']) ?></span></td><td class="attempts"><?= number_format((int)$row['attempts']) ?></td><td><?= h(JalaliDate::format($row['queued_at'])) ?></td></tr>
 <?php endforeach; endif; ?>
 </tbody></table></div>
 <div class="pagination"><span class="result-count">صفحه <?= number_format($page) ?> از <?= number_format($totalPages) ?></span><nav class="pages" aria-label="صفحه‌بندی">
