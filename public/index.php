@@ -12,7 +12,6 @@ try {
     $stats = DashboardService::getStats();
     $databaseReady = true;
 } catch (Throwable $exception) {
-    // جزئیات خطا فقط در لاگ سرور ثبت شود؛ در صفحه عمومی نمایش داده نمی‌شود.
     error_log('[SMS Gateway dashboard] ' . $exception->getMessage());
     $dbError = 'اتصال به دیتابیس برقرار نشد. تنظیمات config/database.php و اجرای MySQL را بررسی کن.';
 }
@@ -35,10 +34,10 @@ function e(string $value): string
         <div class="side-brand"><span class="brand-mark">SMS</span><div><strong>SMS Gateway</strong><small>سامانه مدیریت پیامک</small></div></div>
         <nav class="side-nav">
             <a class="active" href="index.php">نمای کلی</a>
-            <a href="#" aria-disabled="true">ارسال پیامک <em>به‌زودی</em></a>
-            <a href="#" aria-disabled="true">پیامک‌های ارسالی <em>به‌زودی</em></a>
-            <a href="#" aria-disabled="true">پروژه‌ها و API <em>به‌زودی</em></a>
-            <a href="#" aria-disabled="true">دفترچه مخاطبین <em>به‌زودی</em></a>
+            <a href="queue.php">مدیریت صف پیامک</a>
+            <a href="projects.php">پروژه‌ها و API</a>
+            <a href="api-keys.php">مدیریت کلیدهای API</a>
+            <a href="#" aria-disabled="true">ارسال دستی پیامک <em>به‌زودی</em></a>
             <a href="#" aria-disabled="true">تنظیمات مودم <em>به‌زودی</em></a>
         </nav>
         <div class="sidebar-footer">نسخه <?= e(APP_VERSION) ?></div>
@@ -83,8 +82,8 @@ function e(string $value): string
             </article>
             <article class="content-card next-card">
                 <h3>مرحله بعدی توسعه</h3>
-                <p>پس از تأیید اتصال دیتابیس، ماژول مدیریت پروژه‌ها و کلیدهای API را پیاده‌سازی می‌کنیم.</p>
-                <span class="tag">گام بعد: مدیریت پروژه‌ها</span>
+                <p>صف پیامک آماده مشاهده است. گام بعدی، پیاده‌سازی پردازشگر صف و اتصال امن آن به مودم خواهد بود.</p>
+                <a class="tag" href="queue.php">مشاهده صف پیامک</a>
             </article>
         </section>
         <footer class="page-footer">SMS Gateway · مستقل و قابل اتصال به چندین پروژه</footer>
