@@ -3,6 +3,7 @@
 session_start();
 
 require_once __DIR__ . '/../app/Services/Database.php';
+require_once __DIR__ . '/../app/Services/JalaliDate.php';
 
 $db = Database::connection();
 
@@ -365,7 +366,7 @@ th {
                         </td>
 
                         <td>
-                            <?= e($item['created_at']) ?>
+                            <?= e(JalaliDate::format($item['created_at'])) ?>
                         </td>
 
                         <td>
