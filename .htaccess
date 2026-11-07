@@ -1,0 +1,9 @@
+Options -Indexes
+
+# جلوگیری از دسترسی مستقیم وب به فایل‌های پیکربندی و پوشه‌های داخلی
+<FilesMatch "^(\.env|.*\.sql|.*\.log|.*\.example)$">
+    Require all denied
+</FilesMatch>
+
+RewriteEngine On
+RewriteRule ^(app|config|database|routes|storage|agent)(/|$) - [F,L]
